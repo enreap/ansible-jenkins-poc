@@ -1,10 +1,22 @@
 ---
-- name: Create a small file on target server
+- name: Create directories and a file on target server
   hosts: servers          # Inventory group name
   become: yes             # Use sudo if needed
   tasks:
-    - name: Create test file
+    - name: Create main directory
       file:
-        path: /tmp/testfile.txt
+        path: /tmp/devops
+        state: directory
+        mode: '0755'
+
+    - name: Create subdirectory
+      file:
+        path: /tmp/devops/dev
+        state: directory
+        mode: '0755'
+
+    - name: Create a file inside subdirectory
+      file:
+        path: /tmp/devops/dev/test.txt
         state: touch
         mode: '0644'
