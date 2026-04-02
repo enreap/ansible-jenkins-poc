@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy with Ansible') {
             steps {
                 sshagent([env.ANSIBLE_KEY]) {
-                    ssh ubuntu@13.113.78.20 'ansible-playbook -i ${env.INVENTORY} ${env.PLAYBOOK}'
+                    sh "ssh ubuntu@13.113.78.20 'ansible-playbook -i ${env.INVENTORY} ${env.PLAYBOOK}'"
                 }
             }
         }
