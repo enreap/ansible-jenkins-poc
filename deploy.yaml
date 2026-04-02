@@ -1,8 +1,10 @@
-- name: Update apt packages
-  hosts: servers
-  become: yes
-
+---
+- name: Create a small file on target server
+  hosts: servers          # Inventory group name
+  become: yes             # Use sudo if needed
   tasks:
-    - name: Run apt update
-      apt:
-        update_cache: yes
+    - name: Create test file
+      file:
+        path: /tmp/testfile.txt
+        state: touch
+        mode: '0644'
